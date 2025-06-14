@@ -14,7 +14,7 @@ export default function TextInputFormContainer(){
             event.preventDefault();
             console.log("From Submitted",value)
             if(value){
-                navigate("/play")
+                navigate("/play",{state:value})
             }
         }
      
