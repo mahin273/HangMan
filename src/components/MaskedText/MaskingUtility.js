@@ -1,4 +1,5 @@
 export function getMaskedString(originalWord,guessedLetter){
+    console.log("Guessed Letters ==",guessedLetter)
     guessedLetter = guessedLetter.map(letter =>letter.toUpperCase());
 
     const guessedLetterSet = new Set(guessedLetter);

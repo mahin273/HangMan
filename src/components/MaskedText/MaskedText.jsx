@@ -1,7 +1,7 @@
 import { getMaskedString } from "./MaskingUtility"
 
-export default function MaskedText({text,gussedLetters}){
-    const maskedString = getMaskedString(text,gussedLetters);
+export default function MaskedText({text,guessedLetters}){
+    const maskedString = getMaskedString(text,guessedLetters);
     return(
          <>
          {maskedString.map((letter,index)=>{
