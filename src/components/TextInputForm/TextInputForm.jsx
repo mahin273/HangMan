@@ -10,7 +10,7 @@ export default function  TextInputForm({inputType,handleFormSubmit,handleTextInp
             type={inputType}
             label="Enter Here:"
             placeholder="Enter a Word here"
-            onChangeHandler={handleTextInputChange}
+            onChangeHandler={handleTextInputChange} 
             />
         </div>
         <div>
