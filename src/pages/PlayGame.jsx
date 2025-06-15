@@ -21,7 +21,20 @@ export default function PlayGame(){
         }
         setGuessedLetters([...guessedLetters,letter])       
     }
-    
+    const maxStep = state?.length;
+    const isGameOver = step >= maxStep;
+    const isGameWon = state?.split("").every(letter => guessedLetters.includes(letter.toUpperCase()));
+    if(isGameOver || isGameWon){
+        return(
+            <>
+            <h1>{isGameWon ? "You Won!" : "Game Over!"}</h1>
+            <Link to="/" className="text-blue-700"> Home Link</Link>
+            <br/>
+            <Link to="/start" className="text-blue-700"> Start games Link</Link>
+            </>
+        )
+    }
+
     const wordHint = JSON.parse(localStorage.getItem("wordHint")) || "";
 
     return(
