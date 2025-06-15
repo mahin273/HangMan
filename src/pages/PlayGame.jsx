@@ -22,10 +22,12 @@ export default function PlayGame(){
         setGuessedLetters([...guessedLetters,letter])       
     }
     
-    
+    const wordHint = JSON.parse(localStorage.getItem("wordHint")) || "";
+
     return(
         <>
         <h1>Play Game</h1>
+        <h2>Hint: {wordHint}</h2>
         {state &&(
             <>
             <MaskedText text={state?? ""} guessedLetters={guessedLetters}/>

@@ -16,13 +16,20 @@ export default function Home(){
         console.log("Random Word is ",data[random].wordValue);
         setWord(data[random].wordValue);
         setWordHint(hint);
+        
+
     }
     useEffect(()=>{
         fetchWords();
     },[])
+
+    useEffect(()=>{
+        localStorage.setItem('wordHint',JSON.stringify(wordHint));
+    },[wordHint])
+
     return(
         <>
-        <h2>Hint:{wordHint}</h2>
+        
         <Link to="/play" state={word}>
             <Button text="Single Player Game"/>
         </Link>
