@@ -1,14 +1,23 @@
-import { Link ,useLocation} from "react-router-dom";
-import MaskedText from "../components/MaskedText/MaskedText";
-import LetterButtons from "../components/LetterButtons/LetterButtons";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import HangMan from "../components/HangMan/HangMan";
+import LetterButtons from "../components/LetterButtons/LetterButtons";
+import MaskedText from "../components/MaskedText/MaskedText";
 
 export default function PlayGame(){
     const {state} = useLocation();
 
-    const[guessedLetters,setGuessedLetters]=useState([])
+    const[guessedLetters,setGuessedLetters]=useState([]);
+    const[step,steStep]=useState(0);
+
 
     function handleLetterClick(letter){
+        if(state.toUpperCase().includes(letter)){
+            console.log("Correct")
+        }else{
+            console.log("Wrong")
+            steStep(step+1)
+        }
         setGuessedLetters([...guessedLetters,letter])       
     }
     
@@ -19,6 +28,9 @@ export default function PlayGame(){
         <MaskedText text={state} guessedLetters={guessedLetters}/>
         <div>
          <LetterButtons text={state} guessedLetters={guessedLetters} onLetterClick={handleLetterClick}/>  
+        </div>
+        <div>
+            <HangMan step={step}/>
         </div>
         
         <Link to="/start" className="text-blue-700"> Start games Link</Link>
