@@ -2,22 +2,27 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button/Button";
 import { useContext, useEffect } from "react";
 import { WordContext } from "../context/WordContext";
+import useWordStore  from "../stores/WordStore";
 
 
 export default function Home(){
     
-    const {setWordList,setWord,wordHint,setWordHint}=useContext(WordContext)
+    const {wordHint,setWordHint}=useContext(WordContext)
+    // const {setWord,wordHint,setWordHint}=useContext(WordContext)
+
+    const{setWordList,setWord}=useWordStore()
 
     async function fetchWords(){
       const response = await fetch('http://localhost:3000/words');
         const data = await response.json();
 
         setWordList([...data])
+     
 
         const random =Math.floor(Math.random() * data.length);
         const hint= data[random].wordHint;
         console.log("Random Hint is ",hint);
-        console.log("Random Word is ",data[random].wordValue);
+        console.log("Random Word is ",data[random].wordValue); 
         setWord(data[random].wordValue);
         setWordHint(hint);
         
