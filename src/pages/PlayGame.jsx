@@ -1,19 +1,20 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import HangMan from "../components/HangMan/HangMan";
 import LetterButtons from "../components/LetterButtons/LetterButtons";
 import MaskedText from "../components/MaskedText/MaskedText";
+import { WordContext } from "../context/WordContext";
 
 export default function PlayGame(){
-    const {state} = useLocation();
-
+    const{word}=useContext(WordContext)
     const[guessedLetters,setGuessedLetters]=useState([]);
     const[step,steStep]=useState(0);
+    
     
 
 
     function handleLetterClick(letter){
-        if(state?.toUpperCase().includes(letter)){
+        if(word?.toUpperCase().includes(letter)){
             console.log("Correct")
         }else{
             console.log("Wrong")
@@ -21,9 +22,9 @@ export default function PlayGame(){
         }
         setGuessedLetters([...guessedLetters,letter])       
     }
-    const maxStep = state?.length;
+    const maxStep = word?.length;
     const isGameOver = step >= maxStep;
-    const isGameWon = state?.split("").every(letter => guessedLetters.includes(letter.toUpperCase()));
+    const isGameWon = word?.split("").every(letter => guessedLetters.includes(letter.toUpperCase()));
     if(isGameOver || isGameWon){
         return(
             <>
@@ -41,11 +42,11 @@ export default function PlayGame(){
         <>
         <h1>Play Game</h1>
         <h2>Hint: {wordHint}</h2>
-        {state &&(
+        {word &&(
             <>
-            <MaskedText text={state?? ""} guessedLetters={guessedLetters}/>
+            <MaskedText text={word?? ""} guessedLetters={guessedLetters}/>
         <div>
-         <LetterButtons text={state} guessedLetters={guessedLetters} onLetterClick={handleLetterClick}/>  
+         <LetterButtons text={word} guessedLetters={guessedLetters} onLetterClick={handleLetterClick}/>  
         </div>
         <div>
             <HangMan step={step}/>

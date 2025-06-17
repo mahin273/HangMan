@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import Button from "../components/Button/Button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { WordContext } from "../context/WordContext";
 
 
 export default function Home(){
-    const[word,setWord]=useState('')
-    const[wordHint,setWordHint]=useState('')
+    
+    const {setWordList,setWord,wordHint,setWordHint}=useContext(WordContext)
 
     async function fetchWords(){
       const response = await fetch('http://localhost:3000/words');
         const data = await response.json();
+
+        setWordList([...data])
+
         const random =Math.floor(Math.random() * data.length);
         const hint= data[random].wordHint;
         console.log("Random Hint is ",hint);
@@ -30,7 +34,7 @@ export default function Home(){
     return(
         <>
         
-        <Link to="/play" state={word}>
+        <Link to="/play">
             <Button text="Single Player Game"/>
         </Link>
         <br/>
